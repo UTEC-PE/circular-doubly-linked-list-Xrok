@@ -33,5 +33,8 @@ int main()
 	cout<<"-------------"<<endl;
 	test.get(4);
 	test.size();
+	test.clear();
+	cout<<"-------------"<<endl;
+	test.print_list();
 	return 0;
 }

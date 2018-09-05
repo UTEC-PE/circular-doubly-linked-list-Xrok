@@ -35,7 +35,7 @@ class Iterator {
             return *this;
         };
         T operator*(){
-            //Need help :/ .
+            return current->data;
         };
 };
 

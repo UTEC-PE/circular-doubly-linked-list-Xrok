@@ -117,7 +117,7 @@ class List {
             }else{
                 if (position<1)
                 {
-                    cout<<"Posicion no valida"<<endl;
+                    cout<<start<<endl;
                 }else{    
                     Node<T>* actual;
                     actual=start;
@@ -125,7 +125,8 @@ class List {
                     {
                         actual=actual->next;
                     }
-                    cout<<actual->prev->data<<endl;
+                    
+                    return actual->data;
        
                 }
             }
@@ -141,14 +142,16 @@ class List {
                     actual=actual->next;
                     i++;
                 }while(actual->next!=start->next);
-                cout<<i<<endl;
+                return i;
+
             }else{
-                cout<<"lista vacia"<<endl;
+                return 0;
             }
         };
         
         Iterator<T> begin(){
-            return Iterator<T>(start);
+            return Iterator<T>(start) ;
+
         };
         Iterator<T> end(){
             return Iterator<T> (start->prev);
@@ -167,12 +170,17 @@ class List {
             }
         };
         
+        void clear(){
+            
+            while(start!=nullptr){
+                pop_front();
+            }
+        };
+        ~List(){
+            clear();
+    };
         /*FUNCIONES FALTANTES*/
         void concat(List<T> &other);
-        void clear();
-        /*~List(){
-            clear();
-    };*/
 };
 
 #endif

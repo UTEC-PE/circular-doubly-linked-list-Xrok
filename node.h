@@ -10,9 +10,11 @@ struct Node {
     T data;
     Node* next;
     Node* prev;
-
-    void killSelf();
-    void print_next();
+    Node(){
+    	
+    }
+    /*void killSelf();
+    void print_next();*/
 };
 
 #endif

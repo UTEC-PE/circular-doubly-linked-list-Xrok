@@ -19,14 +19,14 @@ class List {
 
         T front(){
             if(!start){
-            cout<<"lista vacia"<<endl;   
+            cout<<"lista vacia"<<endl;    // Es mejor una excepción
             }else{                
                 return start->data;
             }
         };
         T back(){
           if(!start){
-            cout<<"lista vacia"<<endl;   
+            cout<<"lista vacia"<<endl;    // Es mejor una excepción
             }else{
                 
                 return start->prev->data;
@@ -64,7 +64,7 @@ class List {
                 temp->prev=start;   
             }            
         };
-        void pop_front(){
+        void pop_front(){ 
             if (start)
             { 
                 Node<T> *temp_start;
@@ -73,7 +73,7 @@ class List {
                 temp_start=start->next;
                 delete start;
                 
-                if(start==temp_start){
+                if(start==temp_start){ // Ya borraste start
                     start=nullptr;
                     temp_start=nullptr;
                 }else{    
@@ -85,7 +85,7 @@ class List {
                 cout<<"lista vacia"<<endl;
             }
         };
-        void pop_back(){
+        void pop_back(){ 
         if (start)
         {
             if(start == start->prev){
@@ -98,7 +98,7 @@ class List {
             start->prev->prev->next=start;
             start->prev=start->prev->prev;
             delete temp_prev;
-            temp_prev=nullptr;
+            temp_prev=nullptr; // No es necesario
             
             }
         }else{
@@ -113,7 +113,7 @@ class List {
             
             if (!start)
             {
-                cout<<"lista vacia"<<endl;
+                cout<<"lista vacia"<<endl; // Deberías tener un throw
             }else{
                 if (position<1)
                 {

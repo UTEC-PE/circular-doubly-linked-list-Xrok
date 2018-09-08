@@ -20,7 +20,10 @@ int generateRandomInt(int min, int max);
 void insertIntoList(List<int> &numbers);
 void removeFromList(List<int> &numbers);
 
+mt19937 rng;
+
 int main(int argc, char *argv[]) {
+    rng.seed(random_device()());
     cout << "===========================================================" << endl;
     cout << "\tDouble Linked Circular List Practice" << endl;
     cout << "===========================================================" << endl << endl;
@@ -31,7 +34,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < numberOfElements; i++) {
         insertIntoList(test);
     }
-    
+
     assert(test.size() == numberOfElements && "Something is wrong with the push methods");
 
     const int elementsToRemove = generateRandomInt(0, MIN - 1);
@@ -45,36 +48,27 @@ int main(int argc, char *argv[]) {
     test.clear();
     assert(test.empty() && "Something is wrong with the clear or empty methods");
     assert(test.size() == 0 && "Something is wrong with the clear method");
-
+    
     for (int i = 0; i < numberOfElements; i++) {
         insertIntoList(test);
     }
 
     Iterator<int> ite = test.begin();
-
-    //cout<<*ite<<" "<<test.front()<<endl;
     assert(test.front() == *ite && "Something is wrong with the front method or the iterator");
 
     const int position = generateRandomInt(0, numberOfElements - 1);
     for (int i = 0; i < position; i++) {
         ++ite;
     }
-
-    //cout<<test.get(position)<<" "<<*ite<<endl;
     assert(test.get(position) == *ite && "Something is wrong with the get method or the iterator");
-    
+
     ite = test.begin();
     for (int i = 0; i < numberOfElements - 1; i++) {
         ++ite;
     }
     assert(test.back() == *ite && "Something is wrong with the back method or the iterator");
 
-    //cout<<*ite<<" "<<test.get(numberOfElements-2)<<endl;
-
     --ite;
-
-    //cout<<*ite<<" "<<test.get(numberOfElements-2)<<endl;
-
     assert(test.get(numberOfElements - 2) == *ite && "Something is wrong with the iterator (-- operator)");
 
     for (ite = test.begin(); ite != test.end(); ++ite) {
@@ -87,21 +81,18 @@ int main(int argc, char *argv[]) {
 }
 
 int generateRandomInt(int min, int max) {
-    mt19937 rng;
-    rng.seed(random_device()());
-    uniform_int_distribution<mt19937::result_type> distribution(min, max); 
+    uniform_int_distribution<mt19937::result_type> distribution(min, max);
     return distribution(rng);
 }
 
 void insertIntoList(List<int> &numbers) {
     const int numberToInsert = generateRandomInt(0, 100);
-
     const int action = generateRandomInt(0, 1);
     switch (action) {
         case PUSH_FRONT: numbers.push_front(numberToInsert); break;
-        case PUSH_BACK: numbers.push_back(numberToInsert);  break;
+        case PUSH_BACK: numbers.push_back(numberToInsert); break;
     }
-} 
+}
 
 void removeFromList(List<int> &numbers) {
     const int action = generateRandomInt(2, 3);
@@ -109,4 +100,4 @@ void removeFromList(List<int> &numbers) {
         case POP_FRONT: numbers.pop_front(); break;
         case POP_BACK: numbers.pop_back(); break;
     }
-} 
+}
